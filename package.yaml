@@ -1,0 +1,70 @@
+name:                my-audio-generator
+version:             0.1.0.0
+github:              "githubuser/my-audio-generator"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2022 Author name here"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/my-audio-generator#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- process
+- bytestring
+- plotlyhs == 0.2.1
+- lucid
+- microlens == 0.4.12.0
+- text == 1.2.5.0
+- wave >= 0.2.0
+- HCodecs >= 0.5.2
+- containers
+- open-browser == 0.2.1.0
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  source-dirs: src
+    
+
+executables:
+  my-audio-generator-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - my-audio-generator
+
+tests:
+  my-audio-generator-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - my-audio-generator
