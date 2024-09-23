@@ -1,6 +1,6 @@
 # Haskell-Music-Generator
 
-W.I.P
+W.I.P.
 Made with help from ChatGPT.
 Uses ffplay to play generated audio data.
 
