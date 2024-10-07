@@ -1,7 +1,6 @@
 module Utility 
     (
-        floatMod,
-        playTime, numberOfBars,
+        playTime, numberOfBars, numberOfBeats,
         saveWave, saveW, playW
     ) where
 
@@ -21,22 +20,23 @@ import Text.Printf
 import Data.Int (Int16)
 import Defaults
 
-floatMod :: Float -> Float -> Float
-floatMod x y = x - y * (fromIntegral (floor (x / y) :: Int))
+playTime :: [Signal] -> Seconds
+playTime signal = fromIntegral (length signal) / sampleRate
 
-playTime :: [Pulse] -> Seconds
-playTime pulse = fromIntegral (length pulse) / sampleRate
+numberOfBars :: SignalConfig -> [Signal] -> Float
+numberOfBars config signal = totalDurationInSeconds / durationOfOneBarInSeconds
+    where beatDuration = 60.0 / (bpm config)
+          totalDurationInSeconds = fromIntegral (length signal) / sampleRate
+          durationOfOneBarInSeconds = beatDuration * fromIntegral (timeSignatureBeats config)
 
-numberOfBars :: [Pulse] -> Float
-numberOfBars pulse = totalDurationInSeconds / durationOfOneBarInSeconds
-  where
-    totalDurationInSeconds = fromIntegral (length pulse) / sampleRate
-    durationOfOneBarInSeconds = beatDuration * fromIntegral timeSignatureBeats
+numberOfBeats :: [Note] -> Beats
+numberOfBeats notes = foldr (\note acc -> beats note + acc) 0 notes
+    where beats (Note _ b) = b
+          beats (Rest b) = b
 
 toSample :: Float -> Int16
 toSample = round . (* scaleFactor)
-  where
-    scaleFactor = fromIntegral (maxBound :: Int16)
+    where scaleFactor = fromIntegral (maxBound :: Int16)
 
 myWave :: Wave
 myWave = Wave
@@ -59,16 +59,16 @@ writeWave path audioData = do
 writeByteStringToHandle :: Handle -> BS.ByteString -> IO ()
 writeByteStringToHandle handle bs = BS.hPut handle bs
 
-audioToByteString :: [Pulse] -> BL.ByteString
+audioToByteString :: [Signal] -> BL.ByteString
 audioToByteString = B.toLazyByteString . foldMap (B.int16LE . toSample)
 
-saveWave :: FilePath -> [Pulse] -> IO ()
-saveWave fn pulse = writeWave ("audio\\" ++ fn ++ ".wav") (BL.toStrict $ audioToByteString pulse)
+saveWave :: FilePath -> [Signal] -> IO ()
+saveWave fn signal = writeWave ("audio\\" ++ fn ++ ".wav") (BL.toStrict $ audioToByteString signal)
 
-saveW :: FilePath -> [Pulse] -> IO ()
-saveW filePath pulse = BL.writeFile filePath $ B.toLazyByteString $ fold $ map B.floatLE pulse
+saveW :: FilePath -> [Signal] -> IO ()
+saveW filePath signal = BL.writeFile filePath $ B.toLazyByteString $ fold $ map B.floatLE signal
 
-playW :: [Pulse] -> IO () 
+playW :: [Signal] -> IO () 
 playW wave = do
   saveW outputFilePath wave
   _ <- runCommand $ printf "ffplay -autoexit -showmode 1 -f f32le -ar %f %s" sampleRate outputFilePath -- f32le -> 32-bit floating-point numbers, little endian

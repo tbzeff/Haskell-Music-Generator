@@ -1,4 +1,4 @@
-# Changelog for `scratch1`
+# Changelog for `myaudiogenerator`
 
 All notable changes to this project will be documented in this file.
 

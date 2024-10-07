@@ -5,8 +5,8 @@ module Filters
 
 import Defaults
 
-applyFilter :: Filter -> [Pulse] -> [Pulse]
-applyFilter (FIRCoeffs c) signal = map (\i -> sum $ zipWith (*) c (take (length c) $ drop i signal)) [0..(length signal - length c)] -- Finite Impulse Response (FIR) Filter Implementation
+applyFilter :: Filter -> [Signal] -> [Signal]
+applyFilter (FIRCoeffs c) signal = map (\i -> sum $ zipWith (*) c (take (length c) $ drop i signal)) [0..(length signal - length c)] -- Finite ImSignal Response (FIR) Filter Implementation
 applyFilter (IIRCoeffs a b) signal = iirFilter' signal [0,0..] -- Infinite Implulse Response (IIR) Filter Implementation
   where
     iirFilter' [] _ = []

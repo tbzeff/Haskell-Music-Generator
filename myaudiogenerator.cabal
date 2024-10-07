@@ -1,0 +1,90 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           myaudiogenerator
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/myaudiogenerator#readme>
+homepage:       https://github.com/githubuser/myaudiogenerator#readme
+bug-reports:    https://github.com/githubuser/myaudiogenerator/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2024 Author name here
+license:        BSD-3-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/myaudiogenerator
+
+library
+  exposed-modules:
+      Envelopes
+      Filters
+      Freq
+      Utility
+      Composition
+      Defaults
+  other-modules:
+      Paths_myaudiogenerator
+  autogen-modules:
+      Paths_myaudiogenerator
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      HCodecs >=0.5.2
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , process
+    , text >=1.2.5.0
+    , wave >=0.2.0
+  default-language: Haskell2010
+
+executable myaudiogenerator-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_myaudiogenerator
+  autogen-modules:
+      Paths_myaudiogenerator
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HCodecs >=0.5.2
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , myaudiogenerator
+    , process
+    , text >=1.2.5.0
+    , wave >=0.2.0
+  default-language: Haskell2010
+
+test-suite myaudiogenerator-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_myaudiogenerator
+  autogen-modules:
+      Paths_myaudiogenerator
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HCodecs >=0.5.2
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , myaudiogenerator
+    , process
+    , text >=1.2.5.0
+    , wave >=0.2.0
+  default-language: Haskell2010
