@@ -34,7 +34,7 @@ stack build
 
 ### Run the Example Song
 
-The project includes a full-length generative song in `HalloweenMusic.hs`. To play it:
+The project includes a generative song in `HalloweenMusic.hs`. To play it:
 
 ```bash
 stack run
