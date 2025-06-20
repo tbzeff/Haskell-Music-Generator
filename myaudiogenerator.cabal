@@ -32,6 +32,7 @@ library
       Composition
       Defaults
       HalloweenMusic
+      AmbientMusic
   other-modules:
       Paths_myaudiogenerator
   autogen-modules:

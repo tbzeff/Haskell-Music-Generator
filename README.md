@@ -34,7 +34,7 @@ stack build
 
 ### Run the Example Song
 
-The project includes a generative song in `HalloweenMusic.hs`. To play it:
+The project includes a generative song in `AmbientMusic.hs`. To play it:
 
 ```bash
 stack run
@@ -49,6 +49,7 @@ The raw waveform data is saved to `output.bin`. You can modify `Utility.hs` to s
 ## Project Structure
 
 - `Main.hs`: Entry point, plays the example song
+- `AmbientMusic.hs`: Composed demo song
 - `HalloweenMusic.hs`: Composed demo song
 - `Composition.hs`: Note and track creation utilities
 - `Freq.hs`: Waveform generation

@@ -31,3 +31,7 @@ audio/
 Thumbs.db
 *.vscode
 .idea/
+
+CHANGELOG.md
+*.yaml.lock
+*.lock
