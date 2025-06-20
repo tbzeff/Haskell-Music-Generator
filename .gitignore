@@ -1,2 +1,33 @@
+# Haskell build artifacts
+/dist-newstyle/
+/.stack-work/
+/cabal.project.local
+*.hi
+*.o
+*.dyn_o
+*.dyn_hi
+
+# Stack config and builds
 .stack-work/
+.stack/
+.stack-work-install/
+.ghc.environment.*
+.stack-ide/
+
+# Output binaries and audio
+*.bin
+*.wav
+*.mp3
+output.bin
+audio/
+
+# System and IDE files
+*.swp
+*.swo
+*.bak
 *~
+*.tmp
+.DS_Store
+Thumbs.db
+*.vscode
+.idea/
